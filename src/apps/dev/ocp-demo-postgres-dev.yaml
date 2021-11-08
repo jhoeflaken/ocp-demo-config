@@ -1,0 +1,88 @@
+#******************************************************************************
+# Deploys a stateful Postgres 13 instance with service.
+#******************************************************************************
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: postgres
+      labels:
+        app.kubernetes.io/name: postgres
+        app.kubernetes.io/version: '13'
+        app.kubernetes.io/part-of: ocp-demo
+        app.kubernetes.io/component: database
+    spec:
+      template:
+        metadata:
+          name: postgres
+          labels:
+            app.kubernetes.io/name: postgres
+            app.kubernetes.io/version: '13'
+            app.kubernetes.io/part-of: ocp-demo
+            app.kubernetes.io/component: database
+        spec:
+          containers:
+            - name: postgres
+              image: postgres:13
+              imagePullPolicy: Always
+              ports:
+                - containerPort: 5432
+              envFrom:
+                - configMapRef:
+                    name: postgres-config
+              volumeMounts:
+                - mountPath: /var/lib/postgresq;/data
+                  name: postgres_db
+          volumes:
+            - name: postgres_db
+              persistentVolumeClaim:
+                claimName: postgres_db
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: postgres
+          app.kubernetes.io/part-of: ocp-demo
+          app.kubernetes.io/component: database
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: postgres_db
+      labels:
+        app.kubernetes.io/name: postgres
+        app.kubernetes.io/part-of: ocp-demo
+        app.kubernetes.io/component: database
+    spec:
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 2Gi
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: postgres
+      labels:
+        app.kubernetes.io/name: postgres
+        app.kubernetes.io/part-of: ocp-demo
+        app.kubernetes.io/component: database
+    spec:
+      type: ClusterIP
+      ports:
+        - port: 5432
+      selector:
+        app.kubernetes.io/name: postgres
+        app.kubernetes.io/part-of: ocp-demo
+        app.kubernetes.io/component: database
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: postgres-config
+      labels:
+        app.kubernetes.io/name: postgres
+        app.kubernetes.io/part-of: ocp-demo
+        app.kubernetes.io/component: database
+    data:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: '<inject your password here>'
+
