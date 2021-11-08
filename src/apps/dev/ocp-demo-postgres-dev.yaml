@@ -34,9 +34,9 @@ items:
                     name: postgres-config
               volumeMounts:
                 - mountPath: /var/lib/postgresq;/data
-                  name: postgres_db
+                  name: postgres-db
           volumes:
-            - name: postgres_db
+            - name: postgres-db
               persistentVolumeClaim:
                 claimName: postgres-db
       selector:
