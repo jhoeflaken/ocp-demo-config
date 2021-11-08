@@ -83,6 +83,6 @@ items:
         app.kubernetes.io/part-of: ocp-demo
         app.kubernetes.io/component: database
     data:
-      POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: '<inject your password here>'
+      POSTGRES_USER: <postgres_username>
+      POSTGRES_PASSWORD: <postgres_password>
 

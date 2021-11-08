@@ -64,6 +64,6 @@ items:
         app.kubernetes.io/part-of: ocp-demo
         app.kubernetes.io/component: backend
     data:
-      QUARKUS_DATASOURCE_USER: 'postgres'
-      QUARKUS_DATASOURCE_PASSWORD: '<inject-your-password-here>'
+      QUARKUS_DATASOURCE_USER: <postgres_username>
+      QUARKUS_DATASOURCE_PASSWORD: <postgres_password>
       QUARKUS_DATASOURCE_JDBC_URL: 'jdbc:postgres://postgres:5432/ocp-demo'
