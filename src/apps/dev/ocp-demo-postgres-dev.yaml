@@ -38,7 +38,7 @@ items:
           volumes:
             - name: postgres_db
               persistentVolumeClaim:
-                claimName: postgres_db
+                claimName: postgres-db
       selector:
         matchLabels:
           app.kubernetes.io/name: postgres
@@ -47,7 +47,7 @@ items:
   - apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
-      name: postgres_db
+      name: postgres-db
       labels:
         app.kubernetes.io/name: postgres
         app.kubernetes.io/part-of: ocp-demo
