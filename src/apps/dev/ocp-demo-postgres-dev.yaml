@@ -30,7 +30,7 @@ items:
               ports:
                 - containerPort: 5432
               envFrom:
-                - configMapRef:
+                - secretRef:
                     name: postgres-config
               volumeMounts:
                 - mountPath: /var/lib/postgresq/data
@@ -75,13 +75,15 @@ items:
         app.kubernetes.io/part-of: ocp-demo
         app.kubernetes.io/component: database
   - apiVersion: v1
-    kind: ConfigMap
+    kind: Secret
     metadata:
       name: postgres-config
       labels:
         app.kubernetes.io/name: postgres
         app.kubernetes.io/part-of: ocp-demo
         app.kubernetes.io/component: database
+      annotations:
+        avp_path: "secret/data/vplugin/supersecret"
     data:
       POSTGRES_USER: <postgres_username>
       POSTGRES_PASSWORD: <postgres_password>

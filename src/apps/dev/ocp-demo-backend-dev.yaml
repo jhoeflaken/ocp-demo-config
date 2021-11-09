@@ -55,7 +55,7 @@ items:
       ports:
         - port: 8080
   - apiVersion: v1
-    kind: ConfigMap
+    kind: Secret
     metadata:
       name: ocp-demo-backend-config
       labels:
@@ -63,6 +63,8 @@ items:
         app.kubernetes.io/version: 1.0.0-SNAPSHOT
         app.kubernetes.io/part-of: ocp-demo
         app.kubernetes.io/component: backend
+      annotations:
+        avp_path: "secret/data/vplugin/supersecret"
     data:
       QUARKUS_DATASOURCE_USER: <postgres_username>
       QUARKUS_DATASOURCE_PASSWORD: <postgres_password>
