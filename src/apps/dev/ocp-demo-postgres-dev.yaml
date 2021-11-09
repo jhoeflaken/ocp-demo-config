@@ -90,6 +90,6 @@ items:
       annotations:
         avp_path: "secret/data/vplugin/supersecret"
     stringData:
-      POSTGRES_USER: <postgres_username>
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: <postgres_password>
 
