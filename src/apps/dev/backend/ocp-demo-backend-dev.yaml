@@ -54,6 +54,21 @@ items:
         app.kubernetes.io/version: 1.0.0-SNAPSHOT
       ports:
         - port: 8080
+  - apiVersion: route.openshift.io/v1
+    kind: Route
+    metadata:
+      name: ocp-demo-backend
+      labels:
+        app.kubernetes.io/name: ocp-demo-backend
+        app.kubernetes.io/version: 1.0.0-SNAPSHOT
+        app.kubernetes.io/part-of: ocp-demo
+        app.kubernetes.io/component: backend
+    spec:
+      port:
+        targetPort: 8080
+      to:
+        kind: Service
+        name: ocp-demo-backend
   - apiVersion: v1
     kind: Secret
     metadata:

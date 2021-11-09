@@ -50,7 +50,8 @@ items:
         app.kubernetes.io/name: ocp-demo-ui
         app.kubernetes.io/version: 1.0.0-SNAPSHOT
       ports:
-        - port: 8080
+        - port: 3000
+          targetPort: 3000
   - apiVersion: route.openshift.io/v1
     kind: Route
     metadata:
@@ -59,10 +60,10 @@ items:
         app.kubernetes.io/name: ocp-demo-ui
         app.kubernetes.io/version: 1.0.0-SNAPSHOT
         app.kubernetes.io/part-of: ocp-demo
-        app.kubernetes.io/component: forntend
+        app.kubernetes.io/component: frontend
     spec:
       port:
-        targetPort: 8080
+        targetPort: 3000
       to:
         kind: Service
         name: ocp-demo-ui
