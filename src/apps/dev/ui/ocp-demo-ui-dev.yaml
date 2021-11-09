@@ -50,20 +50,39 @@ items:
                 periodSeconds: 20
       strategy:
         canary:
+          stableService: ocp-demo-ui-stable
+          canaryService: ocp-demo-ui-canary
           steps:
             - setWeight: 50
             - pause: {}
   - apiVersion: v1
     kind: Service
     metadata:
-      name: ocp-demo-ui
+      name: ocp-demo-ui-stable
       labels:
         app.kubernetes.io/name: ocp-demo-ui
         app.kubernetes.io/version: 1.0.0-SNAPSHOT
         app.kubernetes.io/part-of: ocp-demo
         app.kubernetes.io/component: frontend
     spec:
-      type: LoadBalancer
+      type: ClusterIP
+      selector:
+        app.kubernetes.io/name: ocp-demo-ui
+        app.kubernetes.io/version: 1.0.0-SNAPSHOT
+      ports:
+        - port: 3000
+          targetPort: 3000
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: ocp-demo-ui-canary
+      labels:
+        app.kubernetes.io/name: ocp-demo-ui
+        app.kubernetes.io/version: 1.0.0-SNAPSHOT
+        app.kubernetes.io/part-of: ocp-demo
+        app.kubernetes.io/component: frontend
+    spec:
+      type: ClusterIP
       selector:
         app.kubernetes.io/name: ocp-demo-ui
         app.kubernetes.io/version: 1.0.0-SNAPSHOT
@@ -84,4 +103,4 @@ items:
         targetPort: 3000
       to:
         kind: Service
-        name: ocp-demo-ui
+        name: ocp-demo-ui-stable
