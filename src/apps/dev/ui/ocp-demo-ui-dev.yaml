@@ -52,6 +52,9 @@ items:
         canary:
           stableService: ocp-demo-ui-stable
           canaryService: ocp-demo-ui-canary
+          trafficRouting:
+            nginx:
+              stableIngress: ocp-demo-ui
           steps:
             - setWeight: 50
             - pause: {}
@@ -98,6 +101,10 @@ items:
         app.kubernetes.io/version: 1.0.0-SNAPSHOT
         app.kubernetes.io/part-of: ocp-demo
         app.kubernetes.io/component: frontend
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/affinity: cookie
+        nginx.ingress.kubernetes.io/affinity-mode: persistent
     spec:
       rules:
         - host: ocp-demo-ui-ocp-demo-dev.apps.syv0q7h2.westeurope.aroapp.io
