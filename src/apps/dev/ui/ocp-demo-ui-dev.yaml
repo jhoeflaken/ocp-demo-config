@@ -52,7 +52,7 @@ items:
         canary:
           steps:
             - setWeight: 50
-              pause: {}
+            - pause: {}
   - apiVersion: v1
     kind: Service
     metadata:
