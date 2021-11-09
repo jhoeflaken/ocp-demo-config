@@ -28,7 +28,7 @@ items:
             app.kubernetes.io/component: frontend
         spec:
           containers:
-            - image: "nexus.cs.axians.nl/ocp-demo/ui"
+            - image: "nexus.cs.axians.nl/ocp-demo/ui:0.10"
               imagePullPolicy: "Always"
               name: "ocp-demo-ui"
               ports:
