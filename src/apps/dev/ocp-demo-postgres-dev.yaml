@@ -33,7 +33,7 @@ items:
                 - secretRef:
                     name: postgres-config
               volumeMounts:
-                - mountPath: /var/lib/postgresq/data
+                - mountPath: /var/lib/postgresql/data
                   name: postgres-db
           volumes:
             - name: postgres-db
