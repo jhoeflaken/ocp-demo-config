@@ -68,4 +68,4 @@ items:
     stringData:
       QUARKUS_DATASOURCE_USER: <postgres_username>
       QUARKUS_DATASOURCE_PASSWORD: <postgres_password>
-      QUARKUS_DATASOURCE_JDBC_URL: 'jdbc:postgres://postgres:5432/ocp-demo'
+      QUARKUS_DATASOURCE_JDBC_URL: 'jdbc:postgresql://postgres:5432/ocp-demo'
