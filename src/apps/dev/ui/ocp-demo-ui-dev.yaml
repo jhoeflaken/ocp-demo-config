@@ -89,8 +89,8 @@ items:
       ports:
         - port: 3000
           targetPort: 3000
-  - apiVersion: route.openshift.io/v1
-    kind: Route
+  - apiVersion: networking.k8s.io/v1beta1
+    kind: Ingress
     metadata:
       name: ocp-demo-ui
       labels:
@@ -99,8 +99,10 @@ items:
         app.kubernetes.io/part-of: ocp-demo
         app.kubernetes.io/component: frontend
     spec:
-      port:
-        targetPort: 3000
-      to:
-        kind: Service
-        name: ocp-demo-ui-stable
+      rules:
+        - http:
+            paths:
+              - path: /
+                backend:
+                  serviceName: ocp-demo-ui-stable
+                  servicePort: 3000
