@@ -62,7 +62,7 @@ items:
         app.kubernetes.io/part-of: ocp-demo
         app.kubernetes.io/component: frontend
     spec:
-      type: ClusterIP
+      type: LoadBalancer
       selector:
         app.kubernetes.io/name: ocp-demo-ui
         app.kubernetes.io/version: 1.0.0-SNAPSHOT
