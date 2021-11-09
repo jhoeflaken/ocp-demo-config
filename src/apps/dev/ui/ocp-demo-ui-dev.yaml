@@ -32,11 +32,12 @@ items:
               imagePullPolicy: "Always"
               name: "ocp-demo-ui"
               ports:
-                - containerPort: 8080
+                - containerPort: 3000
                   name: "http"
                   protocol: "TCP"
               readinessProbe:
-                tcpSocket:
+                httpGet:
+                  path: /
                   port: 3000
                 initialDelaySeconds: 30
                 periodSeconds: 5
