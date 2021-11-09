@@ -84,7 +84,7 @@ items:
         app.kubernetes.io/component: database
       annotations:
         avp_path: "secret/data/vplugin/supersecret"
-    data:
+    stringData:
       POSTGRES_USER: <postgres_username>
       POSTGRES_PASSWORD: <postgres_password>
 

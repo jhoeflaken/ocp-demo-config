@@ -65,7 +65,7 @@ items:
         app.kubernetes.io/component: backend
       annotations:
         avp_path: "secret/data/vplugin/supersecret"
-    data:
+    stringData:
       QUARKUS_DATASOURCE_USER: <postgres_username>
       QUARKUS_DATASOURCE_PASSWORD: <postgres_password>
       QUARKUS_DATASOURCE_JDBC_URL: 'jdbc:postgres://postgres:5432/ocp-demo'
