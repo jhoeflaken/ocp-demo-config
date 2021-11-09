@@ -28,7 +28,7 @@ items:
             app.kubernetes.io/component: frontend
         spec:
           containers:
-            - image: "nexus.cs.axians.nl/ocp-demo/ui:0.10"
+            - image: "nexus.cs.axians.nl/ocp-demo/ui:0.20"
               imagePullPolicy: "Always"
               name: "ocp-demo-ui"
               ports:
@@ -100,7 +100,8 @@ items:
         app.kubernetes.io/component: frontend
     spec:
       rules:
-        - http:
+        - host: ocp-demo-ui-ocp-demo-dev.apps.syv0q7h2.westeurope.aroapp.io
+          http:
             paths:
               - path: /
                 backend:
